@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Adonis HuB"
+version = "1.0.0"
+id = "artifacts/astrix"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21557
+
+[services.development]
+run = "pnpm --filter @workspace/astrix run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/astrix", "run", "build" ]
+publicDir = "artifacts/astrix/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21557"
+BASE_PATH = "/"
